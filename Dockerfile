@@ -16,6 +16,8 @@ RUN apt-get install -y curl git htop unzip vim wget
 
 # Increase limits
 RUN echo '1' > /proc/sys/vm/overcommit_memory
-RUN echo 'hard nofile 16384\nsoft nofile 16384' > /etc/security/limits.d/my.conf
+RUN touch /etc/security/limits.d/my.conf
+RUN echo '* hard nofile 16384' >> /etc/security/limits.d/my.conf
+RUN echo '* soft nofile 16384' >> /etc/security/limits.d/my.conf
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
